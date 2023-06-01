@@ -1,0 +1,62 @@
+* {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+h1 {
+    color: rgb(56, 18, 91);
+    margin: 0;
+}
+h2 {
+    color: rgb(101, 27, 170);
+}
+.button__add,
+.active {
+    width: 100px;
+    height: 30px;
+    background-color: rgb(56, 18, 91);
+    color: white;
+    border-radius: 5%;
+    font-size: 14px;
+}
+.button__clean {
+    width: 170px;
+    height: 40px;
+    margin-top: 25px;
+    margin-left: 329px;
+    font-size: 14px;
+}
+.wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid violet;
+    padding: 20px 100px 50px 100px;
+}
+.task__form {
+    display: flex;
+    justify-content: space-between;
+}
+.task {
+    width: 300px;
+    height: 20px;
+    margin-right: 20px;
+}
+.task__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgb(206, 202, 202);
+    margin-bottom: 5px;    
+}
+
+.task__text {
+    margin: 0;
+}
+.task__checkbox {
+    width: 20px;
+    height: 20px;
+}
+.not-task {
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    color: rgb(161, 159, 159);
+}
