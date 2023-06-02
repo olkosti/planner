@@ -16,6 +16,7 @@ h2 {
     color: white;
     border-radius: 5%;
     font-size: 14px;
+    cursor: pointer;
 }
 .button__clean {
     width: 170px;

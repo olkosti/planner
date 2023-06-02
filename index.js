@@ -7,7 +7,8 @@ const notTask = document.querySelector(".not-task");
 
 //Добавляем задачу в список задач при клике на кнопку
 buttonAdd.addEventListener ('click', () => {
-    let task = taskElement.value;   
+    let task = taskElement.value;
+    if (task !== "") {   
 // добавляем разметку для добавления задачи в список
     notTask.remove();
     const  divTaskItem = document.createElement("div");
@@ -25,6 +26,7 @@ buttonAdd.addEventListener ('click', () => {
     document.querySelector(".task__form").reset(); // очистка формы после отправки
     buttonClean.disabled = false; // делаем кнопку активной
     buttonClean.className = "button__clean active";
+    } 
 });
 
 buttonClean.addEventListener ('click', () => {
