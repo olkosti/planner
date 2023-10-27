@@ -61,3 +61,7 @@ h2 {
     font-size: 20px;
     color: rgb(161, 159, 159);
 }
+
+.inactive {
+    display: none;
+}
