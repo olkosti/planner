@@ -14,25 +14,47 @@ nottaskContainer.appendChild(pNotTask);
 buttonAdd.addEventListener ('click', () => {
     let task = taskElement.value;    
     if (task.trim() !== "") {   
-// добавляем разметку для добавления задачи в список
-taskList
-    pNotTask.classList.add('inactive');
-    const  divTaskItem = document.createElement("div");
-    divTaskItem.className = "task__item";
-    const  pTaskText = document.createElement("p");
-    pTaskText.className = "task__text";
-    pTaskText.textContent = `${task}`;
-    const  inputTaskCheckbox = document.createElement("input");
-    inputTaskCheckbox.className = "task__checkbox";
-    inputTaskCheckbox.type = "checkbox";
-    divTaskItem.append(pTaskText);
-    divTaskItem.append(inputTaskCheckbox);
-    taskList.append(divTaskItem);
+        // добавляем разметку для добавления задачи в список
+        pNotTask.classList.add('inactive');
+        const  divTaskItem = document.createElement("div");
+        divTaskItem.className = "task__item";
+        const  pTaskText = document.createElement("p");
+        pTaskText.className = "task__text";
+        pTaskText.textContent = task;
+        const  inputTaskCheckbox = document.createElement("input");
+        inputTaskCheckbox.className = "task__checkbox";
+        inputTaskCheckbox.type = "checkbox";
+        divTaskItem.append(pTaskText);
+        divTaskItem.append(inputTaskCheckbox);
+        taskList.append(divTaskItem);
 
-    document.querySelector(".task__form").reset(); // очистка формы после отправки
-    buttonClean.disabled = false; // делаем кнопку активной
-    buttonClean.className = "button__clean active";
+        document.querySelector(".task__form").reset(); // очистка формы после отправки
+        buttonClean.disabled = false; // делаем кнопку активной
+        buttonClean.className = "button__clean active";
+
+        //сохраняем задачу в local storage
+        let tasks = localStorage.getItem('tasks');
+        if (tasks) {
+            // если в Local Storage уже есть сохраненные задачи, добавляем новую задачу в массив
+            tasks = JSON.parse(tasks);
+            tasks.push(task);
+        } else {
+            // если в Local Storage еще нет сохраненных задач, создаем новый массив с задачей
+            tasks = [task];
+        }
+        localStorage.setItem('tasks', JSON.stringify(tasks));
     } 
+});
+
+window.addEventListener("load", () => {
+    let tasks = localStorage.getItem("tasks");
+    if (tasks) {
+        // если есть сохраненные задачи, восстанавливаем список задач
+        tasks = JSON.parse(tasks);
+        tasks.forEach(task => {
+            
+        });
+    }
 });
 
 buttonClean.addEventListener ('click', () => {
@@ -41,4 +63,6 @@ buttonClean.addEventListener ('click', () => {
     buttonClean.disabled = true;
     buttonClean.className = "button__clean";
 });
+
+
 
