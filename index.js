@@ -5,32 +5,35 @@ const taskList = document.querySelector(".task__list");
 const notTask = document.querySelector(".not-task");
 const nottaskContainer = document.querySelector(".nottask__container");
 
-const pNotTask = document.createElement("p");
-pNotTask.className = "not-task";
-pNotTask.textContent = "Нет задач";
-nottaskContainer.appendChild(pNotTask);
+//Функция создания элемента для задачи
+function createTaskElement(text) {
+    const  divTaskItem = document.createElement("div");
+    divTaskItem.className = "task__item";
 
+    const  pTaskText = document.createElement("p");
+    pTaskText.className = "task__text";
+    pTaskText.textContent = text;
+
+    const  inputTaskCheckbox = document.createElement("input");
+    inputTaskCheckbox.className = "task__checkbox";
+    inputTaskCheckbox.type = "checkbox";
+    divTaskItem.append(pTaskText);
+
+    divTaskItem.append(pTaskText);
+    divTaskItem.append(inputTaskCheckbox);
+    taskList.append(divTaskItem);
+    return divTaskItem;
+}
 
 function addTask() {
     let task = taskElement.value;    
     if (task.trim() !== "") {   
-        // добавляем разметку для добавления задачи в список
-        pNotTask.classList.add('inactive');
-        const  divTaskItem = document.createElement("div");
-        divTaskItem.className = "task__item";
-        const  pTaskText = document.createElement("p");
-        pTaskText.className = "task__text";
-        pTaskText.textContent = task;
-        const  inputTaskCheckbox = document.createElement("input");
-        inputTaskCheckbox.className = "task__checkbox";
-        inputTaskCheckbox.type = "checkbox";
-        divTaskItem.append(pTaskText);
-        divTaskItem.append(inputTaskCheckbox);
-        taskList.append(divTaskItem);
+        // добавляем задачу
+        createTaskElement(task);
 
         document.querySelector(".task__form").reset(); // очистка формы после отправки
         buttonClean.disabled = false; // делаем кнопку активной
-        buttonClean.className = "button__clean active";
+        buttonClean.classList.add('active');
 
         //сохраняем задачу в local storage
         let tasks = localStorage.getItem('tasks');
@@ -52,31 +55,19 @@ function loadTasks() {
         // если есть сохраненные задачи, восстанавливаем список задач
         tasks = JSON.parse(tasks);
         tasks.forEach(task => {
-            pNotTask.classList.add('inactive');
-            const  divTaskItem = document.createElement("div");
-            divTaskItem.className = "task__item";
-            const  pTaskText = document.createElement("p");
-            pTaskText.className = "task__text";
-            pTaskText.textContent = task;
-            const  inputTaskCheckbox = document.createElement("input");
-            inputTaskCheckbox.className = "task__checkbox";
-            inputTaskCheckbox.type = "checkbox";
-            divTaskItem.append(pTaskText);
-            divTaskItem.append(inputTaskCheckbox);
-            taskList.append(divTaskItem);
+            createTaskElement(task);
 
             document.querySelector(".task__form").reset(); // очистка формы после отправки
             buttonClean.disabled = false; // делаем кнопку активной
-            buttonClean.className = "button__clean active";
+            buttonClean.classList.add('active');
         });
     }
 }
 
 function cleanTasks() {
-    taskList.innerHTML = "";
-    pNotTask.classList.remove('inactive');    
+    taskList.innerHTML = "";  
     buttonClean.disabled = true;
-    buttonClean.className = "button__clean";
+    buttonClean.classList.remove('active');
 
     //очистка local storage при нажатии кнопки Очистить
     window.localStorage.clear();
