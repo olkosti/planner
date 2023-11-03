@@ -6,17 +6,18 @@ const notTask = document.querySelector(".not-task");
 const nottaskContainer = document.querySelector(".nottask__container");
 
 //Функция создания элемента для задачи
-function createTaskElement(text) {
+function createTaskElement(task) {
     const  divTaskItem = document.createElement("div");
     divTaskItem.className = "task__item";
 
     const  pTaskText = document.createElement("p");
     pTaskText.className = "task__text";
-    pTaskText.textContent = text;
+    pTaskText.textContent = task.text;
 
     const  inputTaskCheckbox = document.createElement("input");
     inputTaskCheckbox.className = "task__checkbox";
     inputTaskCheckbox.type = "checkbox";
+    inputTaskCheckbox.checked = task.checked;
     divTaskItem.append(pTaskText);
 
     divTaskItem.append(pTaskText);
@@ -26,8 +27,14 @@ function createTaskElement(text) {
 }
 
 function addTask() {
-    let task = taskElement.value;    
-    if (task.trim() !== "") {   
+    let taskText = taskElement.value;    
+    if (taskText.trim() !== "") {
+        
+         // создаем объект задачи
+        const task = {
+            text: taskText,
+            checked: false
+        };   
         // добавляем задачу
         createTaskElement(task);
 
