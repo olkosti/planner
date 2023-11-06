@@ -17,6 +17,7 @@ function createTaskElement(task) {
     const  inputTaskCheckbox = document.createElement("input");
     inputTaskCheckbox.className = "task__checkbox";
     inputTaskCheckbox.type = "checkbox";
+    inputTaskCheckbox.id = task.text;
     inputTaskCheckbox.checked = task.checked;
     divTaskItem.append(pTaskText);
 
