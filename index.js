@@ -20,13 +20,24 @@ function createTaskElement(task) {
     inputTaskCheckbox.id = task.text;
     inputTaskCheckbox.checked = task.checked;
     divTaskItem.append(pTaskText);
+    inputTaskCheckbox.addEventListener("change", toggleTaskState);
 
     divTaskItem.append(pTaskText);
     divTaskItem.append(inputTaskCheckbox);
     taskList.append(divTaskItem);
     return divTaskItem;
 }
-// xcdvfb 
+
+function toggleTaskState(event) {
+    let tasks = JSON.parse(localStorage.getItem("tasks"));
+    const foundTaskIndex = tasks.findIndex(
+        (task) => task.text === event.target.id
+    );
+    if (foundTaskIndex !== -1) {
+        tasks[foundTaskIndex].checked = event.target.checked;
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+}
 
 function addTask() {
     let taskText = taskElement.value;    
