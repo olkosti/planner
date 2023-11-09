@@ -7,14 +7,14 @@ const nottaskContainer = document.querySelector(".nottask__container");
 
 //Функция создания элемента для задачи
 function createTaskElement(task) {
-    const  divTaskItem = document.createElement("div");
+    const divTaskItem = document.createElement("div");
     divTaskItem.className = "task__item";
 
-    const  pTaskText = document.createElement("p");
+    const pTaskText = document.createElement("p");
     pTaskText.className = "task__text";
     pTaskText.textContent = task.text;
 
-    const  inputTaskCheckbox = document.createElement("input");
+    const inputTaskCheckbox = document.createElement("input");
     inputTaskCheckbox.className = "task__checkbox";
     inputTaskCheckbox.type = "checkbox";
     inputTaskCheckbox.id = task.text;
@@ -28,6 +28,7 @@ function createTaskElement(task) {
     return divTaskItem;
 }
 
+//функция сохранения выбора (чекбокса) в local storage
 function toggleTaskState(event) {
     let tasks = JSON.parse(localStorage.getItem("tasks"));
     const foundTaskIndex = tasks.findIndex(
@@ -40,14 +41,14 @@ function toggleTaskState(event) {
 }
 
 function addTask() {
-    let taskText = taskElement.value;    
+    let taskText = taskElement.value;
     if (taskText.trim() !== "") {
-        
-         // создаем объект задачи
+
+        // создаем объект задачи
         const task = {
             text: taskText,
             checked: false
-        };   
+        };
         // добавляем задачу
         createTaskElement(task);
 
@@ -66,7 +67,7 @@ function addTask() {
             tasks = [task];
         }
         localStorage.setItem('tasks', JSON.stringify(tasks));
-    } 
+    }
 }
 
 function loadTasks() {
@@ -85,7 +86,7 @@ function loadTasks() {
 }
 
 function cleanTasks() {
-    taskList.innerHTML = "";  
+    taskList.innerHTML = "";
     buttonClean.disabled = true;
     buttonClean.classList.remove('active');
 
@@ -93,7 +94,7 @@ function cleanTasks() {
     window.localStorage.clear();
 }
 
-buttonAdd.addEventListener ('click', addTask);
+buttonAdd.addEventListener('click', addTask);
 window.addEventListener("load", loadTasks);
-buttonClean.addEventListener ('click', cleanTasks);
+buttonClean.addEventListener('click', cleanTasks);
 
